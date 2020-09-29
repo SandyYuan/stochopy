@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>stochopy.sample.mcmc._mcmc &mdash; stochopy 2.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> stochopy
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Reference documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/index.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">stochopy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>stochopy.sample.mcmc._mcmc</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for stochopy.sample.mcmc._mcmc</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">from</span> <span class="nn">.._common</span> <span class="kn">import</span> <span class="n">in_search_space</span>
+<span class="kn">from</span> <span class="nn">.._helpers</span> <span class="kn">import</span> <span class="n">SampleResult</span><span class="p">,</span> <span class="n">register</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;sample&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">sample</span><span class="p">(</span>
+    <span class="n">fun</span><span class="p">,</span>
+    <span class="n">bounds</span><span class="p">,</span>
+    <span class="n">x0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">args</span><span class="o">=</span><span class="p">(),</span>
+    <span class="n">maxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">stepsize</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">perc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">constraints</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">return_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sample the variable space using the Metropolis-Hastings algorithm.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fun : callable</span>
+<span class="sd">        The objective function to be sampled. Must be in the form ``f(x, *args)``, where ``x`` is the argument in the form of a 1-D array and args is a tuple of any additional fixed parameters needed to completely specify the function.</span>
+<span class="sd">    bounds : array_like</span>
+<span class="sd">        Bounds for variables. ``(min, max)`` pairs for each element in ``x``, defining the finite lower and upper bounds for the sampling argument of ``fun``. It is required to have ``len(bounds) == len(x)``. ``len(bounds)`` is used to determine the number of parameters in ``x``.</span>
+<span class="sd">    x0 : array_like or None, optional, default None</span>
+<span class="sd">        Initial sample. Array of real elements of size (``ndim``,), where ``ndim`` is the number of independent variables.</span>
+<span class="sd">    args : tuple, optional, default None</span>
+<span class="sd">        Extra arguments passed to the objective function.</span>
+<span class="sd">    maxiter : int, optional, default 100</span>
+<span class="sd">        Total number of samples to generate.</span>
+<span class="sd">    stepsize : scalar or array_like, optional, default 0.1</span>
+<span class="sd">        Standard deviation of Gaussian perturbation (as a fraction of feasible space defined by ``bounds``).</span>
+<span class="sd">    perc : scalar, optional, default 1.0</span>
+<span class="sd">        Number of dimensions to perturb at each iteration (as a fraction of total number of variables).</span>
+<span class="sd">    seed : int or None, optional, default None</span>
+<span class="sd">        Seed for random number generator.</span>
+<span class="sd">    constraints : str or None, optional, default None</span>
+<span class="sd">        Constraints definition:</span>
+
+<span class="sd">         - None: no constraint</span>
+<span class="sd">         - &#39;Reject&#39;: infeasible solutions are always rejected</span>
+
+<span class="sd">    return_all : bool, optional, default True</span>
+<span class="sd">        Set to True to return an array with shape (``maxiter``, ``ndim``) of all the samples.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`stochopy.sample.SampleResult`</span>
+<span class="sd">        The sampling result represented as a :class:`stochopy.sample.SampleResult`. Important attributes are:</span>
+
+<span class="sd">         - ``x``: the best sample array</span>
+<span class="sd">         - ``fun``: the best sample function value</span>
+<span class="sd">         - ``xall``: the samples array</span>
+<span class="sd">         - &#39;`funall``: the samples&#39; function value array</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Cost function</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="s2">&quot;__call__&quot;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">()</span>
+
+    <span class="c1"># Dimensionality and search space</span>
+    <span class="k">if</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">()</span>
+
+    <span class="n">ndim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span>
+    <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span>
+
+    <span class="c1"># Initial guess x0</span>
+    <span class="k">if</span> <span class="n">x0</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="o">!=</span> <span class="n">ndim</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">()</span>
+
+    <span class="c1"># Step size</span>
+    <span class="k">if</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">stepsize</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">stepsize</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">ndim</span><span class="p">,</span> <span class="n">stepsize</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stepsize</span><span class="p">)</span> <span class="o">!=</span> <span class="n">ndim</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">()</span>
+
+    <span class="n">stepsize</span> <span class="o">*=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">upper</span> <span class="o">-</span> <span class="n">lower</span><span class="p">)</span>
+
+    <span class="c1"># Number of dimensions to perturb per iteration</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="mf">0.0</span> <span class="o">&lt;=</span> <span class="n">perc</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">()</span>
+
+    <span class="n">ndim_per_iter</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">perc</span> <span class="o">*</span> <span class="n">ndim</span><span class="p">))</span>
+
+    <span class="c1"># Seed</span>
+    <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+
+    <span class="c1"># Initialize arrays</span>
+    <span class="n">xall</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">maxiter</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
+    <span class="n">funall</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">maxiter</span><span class="p">)</span>
+    <span class="n">xall</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0</span> <span class="k">if</span> <span class="n">x0</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">)</span>
+    <span class="n">funall</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="n">xall</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="c1"># Metropolis-Hastings algorithm</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">n_accepted</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">maxiter</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">ndim_per_iter</span><span class="p">):</span>
+            <span class="n">jmax</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ndim</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="n">ndim_per_iter</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">perturbation</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">jmax</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">stepsize</span><span class="p">[</span><span class="n">j</span> <span class="p">:</span> <span class="n">jmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+            <span class="n">xall</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">xall</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">xall</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="p">:</span> <span class="n">jmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">perturbation</span>
+
+            <span class="n">accept</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">in_search_space</span><span class="p">(</span><span class="n">xall</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">constraints</span><span class="p">):</span>
+                <span class="n">funall</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="n">xall</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+                <span class="n">log_alpha</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">funall</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">funall</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">accept</span> <span class="o">=</span> <span class="n">log_alpha</span> <span class="o">&gt;</span> <span class="n">numpy</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">())</span>
+
+            <span class="k">if</span> <span class="n">accept</span><span class="p">:</span>
+                <span class="n">n_accepted</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">xall</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">xall</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="n">funall</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">funall</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">maxiter</span><span class="p">:</span>
+                <span class="k">break</span>
+
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">funall</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">SampleResult</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">xall</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">fun</span><span class="o">=</span><span class="n">funall</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">nit</span><span class="o">=</span><span class="n">maxiter</span><span class="p">,</span> <span class="n">accept_ratio</span><span class="o">=</span><span class="n">n_accepted</span> <span class="o">/</span> <span class="n">maxiter</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">return_all</span><span class="p">:</span>
+        <span class="n">res</span><span class="p">[</span><span class="s2">&quot;xall&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">xall</span>
+        <span class="n">res</span><span class="p">[</span><span class="s2">&quot;funall&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">funall</span>
+
+    <span class="k">return</span> <span class="n">res</span>
+
+
+<span class="n">register</span><span class="p">(</span><span class="s2">&quot;mcmc&quot;</span><span class="p">,</span> <span class="n">sample</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Keurfon Luu
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

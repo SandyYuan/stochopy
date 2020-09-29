@@ -1,0 +1,437 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Sample &mdash; stochopy 2.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Factory" href="factory.html" />
+    <link rel="prev" title="Optimize" href="optimize.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> stochopy
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Reference documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="optimize.html">Optimize</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Sample</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#result">Result</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#available-samplers">Available samplers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hamiltonian-monte-carlo">Hamiltonian Monte-Carlo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#markov-chain-monte-carlo">Markov-Chain Monte-Carlo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="factory.html">Factory</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">stochopy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">API Reference</a> &raquo;</li>
+        
+      <li>Sample</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/sample.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sample">
+<h1>Sample<a class="headerlink" href="#sample" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="stochopy.sample.sample">
+<code class="sig-prename descclassname">stochopy.sample.</code><code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fun</span></em>, <em class="sig-param"><span class="n">bounds</span></em>, <em class="sig-param"><span class="n">x0</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'mcmc'</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stochopy/sample/_helpers.html#sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stochopy.sample.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample the variable space of an objective function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fun</strong> (<em>callable</em>) – The objective function to be sampled. Must be in the form <code class="docutils literal notranslate"><span class="pre">f(x,</span> <span class="pre">*args)</span></code>, where <code class="docutils literal notranslate"><span class="pre">x</span></code> is the argument in the form of a 1-D array and args is a tuple of any additional fixed parameters needed to completely specify the function.</p></li>
+<li><p><strong>bounds</strong> (<em>array_like</em>) – Bounds for variables. <code class="docutils literal notranslate"><span class="pre">(min,</span> <span class="pre">max)</span></code> pairs for each element in <code class="docutils literal notranslate"><span class="pre">x</span></code>, defining the finite lower and upper bounds for the sampling argument of <code class="docutils literal notranslate"><span class="pre">fun</span></code>. It is required to have <code class="docutils literal notranslate"><span class="pre">len(bounds)</span> <span class="pre">==</span> <span class="pre">len(x)</span></code>. <code class="docutils literal notranslate"><span class="pre">len(bounds)</span></code> is used to determine the number of parameters in <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p><strong>x0</strong> (<em>array_like</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Initial sample. Array of real elements of size (<code class="docutils literal notranslate"><span class="pre">ndim</span></code>,), where <code class="docutils literal notranslate"><span class="pre">ndim</span></code> is the number of independent variables.</p></li>
+<li><p><strong>args</strong> (<em>tuple</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Extra arguments passed to the objective function.</p></li>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default 'mcmc'</em>) – <p>Type of sampler. Should be one of:</p>
+<blockquote>
+<div><ul>
+<li><p>’mcmc’</p></li>
+<li><p>’hmc’</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>options</strong> (<em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – <p>A dictionary of sampler options. All methods accept the following generic options:</p>
+<blockquote>
+<div><ul>
+<li><p>maxiter (int): total number of samples to generate</p></li>
+<li><p>seed (int or None): seed for random number generator</p></li>
+<li><p>return_all (bool): set to True to return an array of all the solutions at each iteration</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>The sampling result represented as a <a class="reference internal" href="#stochopy.sample.SampleResult" title="stochopy.sample.SampleResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.sample.SampleResult</span></code></a>. Important attributes are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: the best sample array</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fun</span></code>: the best sample function value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xall</span></code>: the samples array</p></li>
+<li><p>’<cite>funall`</cite>: the samples’ function value array</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#stochopy.sample.SampleResult" title="stochopy.sample.SampleResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.sample.SampleResult</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="section" id="result">
+<h2>Result<a class="headerlink" href="#result" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="stochopy.sample.SampleResult">
+<code class="sig-prename descclassname">stochopy.sample.</code><code class="sig-name descname">SampleResult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stochopy/sample/_helpers.html#SampleResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stochopy.sample.SampleResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent the sampling result.</p>
+<dl class="py attribute">
+<dt id="stochopy.sample.x">
+<code class="sig-prename descclassname">stochopy.sample.</code><code class="sig-name descname">x</code><a class="headerlink" href="#stochopy.sample.x" title="Permalink to this definition">¶</a></dt>
+<dd><p>The best solution sampled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array_like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stochopy.sample.fun">
+<code class="sig-prename descclassname">stochopy.sample.</code><code class="sig-name descname">fun</code><a class="headerlink" href="#stochopy.sample.fun" title="Permalink to this definition">¶</a></dt>
+<dd><p>The solution function value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>scalar</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stochopy.sample.nit">
+<code class="sig-prename descclassname">stochopy.sample.</code><code class="sig-name descname">nit</code><a class="headerlink" href="#stochopy.sample.nit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of samples generated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<p>There may be additional attributes not listed above depending of the specific solver.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="available-samplers">
+<h2>Available samplers<a class="headerlink" href="#available-samplers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hamiltonian-monte-carlo">
+<h3>Hamiltonian Monte-Carlo<a class="headerlink" href="#hamiltonian-monte-carlo" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="stochopy.sample.hmc">
+<code class="sig-prename descclassname">stochopy.sample.</code><code class="sig-name descname">hmc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fun</span></em>, <em class="sig-param"><span class="n">bounds</span></em>, <em class="sig-param"><span class="n">x0</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">maxiter</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">nleap</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">stepsize</span><span class="o">=</span><span class="default_value">0.01</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">jac</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">finite_diff_abs_step</span><span class="o">=</span><span class="default_value">0.0001</span></em>, <em class="sig-param"><span class="n">constraints</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">return_all</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#stochopy.sample.hmc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample the variable space using the Hamiltonian (Hybrid) Monte-Carlo algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fun</strong> (<em>callable</em>) – The objective function to be sampled. Must be in the form <code class="docutils literal notranslate"><span class="pre">f(x,</span> <span class="pre">*args)</span></code>, where <code class="docutils literal notranslate"><span class="pre">x</span></code> is the argument in the form of a 1-D array and args is a tuple of any additional fixed parameters needed to completely specify the function.</p></li>
+<li><p><strong>bounds</strong> (<em>array_like</em>) – Bounds for variables. <code class="docutils literal notranslate"><span class="pre">(min,</span> <span class="pre">max)</span></code> pairs for each element in <code class="docutils literal notranslate"><span class="pre">x</span></code>, defining the finite lower and upper bounds for the sampling argument of <code class="docutils literal notranslate"><span class="pre">fun</span></code>. It is required to have <code class="docutils literal notranslate"><span class="pre">len(bounds)</span> <span class="pre">==</span> <span class="pre">len(x)</span></code>. <code class="docutils literal notranslate"><span class="pre">len(bounds)</span></code> is used to determine the number of parameters in <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p><strong>x0</strong> (<em>array_like</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Initial sample. Array of real elements of size (<code class="docutils literal notranslate"><span class="pre">ndim</span></code>,), where <code class="docutils literal notranslate"><span class="pre">ndim</span></code> is the number of independent variables.</p></li>
+<li><p><strong>args</strong> (<em>tuple</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Extra arguments passed to the objective function.</p></li>
+<li><p><strong>maxiter</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 100</em>) – Total number of samples to generate.</p></li>
+<li><p><strong>nleap</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 10</em>) – Number of leap-frog steps.</p></li>
+<li><p><strong>stepsize</strong> (<em>scalar</em><em> or </em><em>array_like</em><em>, </em><em>optional</em><em>, </em><em>default 0.01</em>) – Leap-frog step size (as a fraction of feasible space defined by <code class="docutils literal notranslate"><span class="pre">bounds</span></code>).</p></li>
+<li><p><strong>perc</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.0</em>) – Number of dimensions to perturb at each iteration (as a fraction of total number of variables).</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Seed for random number generator.</p></li>
+<li><p><strong>jac</strong> (<em>callable</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Method for computing the gradient vector. If it is a callable, it should be a function in the form  <code class="docutils literal notranslate"><span class="pre">jac(x,</span> <span class="pre">*args)</span></code> that returns the gradient vector where <code class="docutils literal notranslate"><span class="pre">x</span></code> is an array with shape (<code class="docutils literal notranslate"><span class="pre">ndim</span></code>,) and <code class="docutils literal notranslate"><span class="pre">args</span></code> is a tuple with the fixed parameters. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, the gradient will be estimated using 2-point finite difference estimation with an absolute step size.</p></li>
+<li><p><strong>finite_diff_abs_step</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.0e-4</em>) – The absolute step size to use for numerical approximation of the jacobian.</p></li>
+<li><p><strong>constraints</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – <p>Constraints definition:</p>
+<blockquote>
+<div><ul>
+<li><p>None: no constraint</p></li>
+<li><p>’Reject’: infeasible solutions are always rejected</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>return_all</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default True</em>) – Set to True to return an array with shape (<code class="docutils literal notranslate"><span class="pre">maxiter</span></code>, <code class="docutils literal notranslate"><span class="pre">ndim</span></code>) of all the samples.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>The sampling result represented as a <a class="reference internal" href="#stochopy.sample.SampleResult" title="stochopy.sample.SampleResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.sample.SampleResult</span></code></a>. Important attributes are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: the best sample array</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fun</span></code>: the best sample function value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xall</span></code>: the samples array</p></li>
+<li><p>’<cite>funall`</cite>: the samples’ function value array</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#stochopy.sample.SampleResult" title="stochopy.sample.SampleResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.sample.SampleResult</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id1"><span class="brackets">1</span></dt>
+<dd><ol class="upperalpha simple" start="19">
+<li><p>Duane, A. D. Kennedy, B. J. Pendleton and D. Roweth, <em>Hybrid Monte Carlo</em>, Physics Letters B., 1987, 195(2): 216-222</p></li>
+</ol>
+</dd>
+<dt class="label" id="id2"><span class="brackets">2</span></dt>
+<dd><ol class="upperalpha simple" start="14">
+<li><p>Radford, <em>MCMC Using Hamiltonian Dynamics</em>, Handbook of Markov Chain Monte Carlo, Chapman and Hall/CRC, 2011</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="markov-chain-monte-carlo">
+<h3>Markov-Chain Monte-Carlo<a class="headerlink" href="#markov-chain-monte-carlo" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="stochopy.sample.mcmc">
+<code class="sig-prename descclassname">stochopy.sample.</code><code class="sig-name descname">mcmc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fun</span></em>, <em class="sig-param"><span class="n">bounds</span></em>, <em class="sig-param"><span class="n">x0</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">maxiter</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">stepsize</span><span class="o">=</span><span class="default_value">0.1</span></em>, <em class="sig-param"><span class="n">perc</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">constraints</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">return_all</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#stochopy.sample.mcmc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample the variable space using the Metropolis-Hastings algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fun</strong> (<em>callable</em>) – The objective function to be sampled. Must be in the form <code class="docutils literal notranslate"><span class="pre">f(x,</span> <span class="pre">*args)</span></code>, where <code class="docutils literal notranslate"><span class="pre">x</span></code> is the argument in the form of a 1-D array and args is a tuple of any additional fixed parameters needed to completely specify the function.</p></li>
+<li><p><strong>bounds</strong> (<em>array_like</em>) – Bounds for variables. <code class="docutils literal notranslate"><span class="pre">(min,</span> <span class="pre">max)</span></code> pairs for each element in <code class="docutils literal notranslate"><span class="pre">x</span></code>, defining the finite lower and upper bounds for the sampling argument of <code class="docutils literal notranslate"><span class="pre">fun</span></code>. It is required to have <code class="docutils literal notranslate"><span class="pre">len(bounds)</span> <span class="pre">==</span> <span class="pre">len(x)</span></code>. <code class="docutils literal notranslate"><span class="pre">len(bounds)</span></code> is used to determine the number of parameters in <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p><strong>x0</strong> (<em>array_like</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Initial sample. Array of real elements of size (<code class="docutils literal notranslate"><span class="pre">ndim</span></code>,), where <code class="docutils literal notranslate"><span class="pre">ndim</span></code> is the number of independent variables.</p></li>
+<li><p><strong>args</strong> (<em>tuple</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Extra arguments passed to the objective function.</p></li>
+<li><p><strong>maxiter</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 100</em>) – Total number of samples to generate.</p></li>
+<li><p><strong>stepsize</strong> (<em>scalar</em><em> or </em><em>array_like</em><em>, </em><em>optional</em><em>, </em><em>default 0.1</em>) – Standard deviation of Gaussian perturbation (as a fraction of feasible space defined by <code class="docutils literal notranslate"><span class="pre">bounds</span></code>).</p></li>
+<li><p><strong>perc</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.0</em>) – Number of dimensions to perturb at each iteration (as a fraction of total number of variables).</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Seed for random number generator.</p></li>
+<li><p><strong>constraints</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – <p>Constraints definition:</p>
+<blockquote>
+<div><ul>
+<li><p>None: no constraint</p></li>
+<li><p>’Reject’: infeasible solutions are always rejected</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>return_all</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default True</em>) – Set to True to return an array with shape (<code class="docutils literal notranslate"><span class="pre">maxiter</span></code>, <code class="docutils literal notranslate"><span class="pre">ndim</span></code>) of all the samples.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>The sampling result represented as a <a class="reference internal" href="#stochopy.sample.SampleResult" title="stochopy.sample.SampleResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.sample.SampleResult</span></code></a>. Important attributes are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: the best sample array</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fun</span></code>: the best sample function value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xall</span></code>: the samples array</p></li>
+<li><p>’<cite>funall`</cite>: the samples’ function value array</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#stochopy.sample.SampleResult" title="stochopy.sample.SampleResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.sample.SampleResult</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="factory.html" class="btn btn-neutral float-right" title="Factory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="optimize.html" class="btn btn-neutral float-left" title="Optimize" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Keurfon Luu
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

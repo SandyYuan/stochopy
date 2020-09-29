@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Factory &mdash; stochopy 2.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Sample" href="sample.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> stochopy
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Reference documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="optimize.html">Optimize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sample.html">Sample</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Factory</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">stochopy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">API Reference</a> &raquo;</li>
+        
+      <li>Factory</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/factory.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="factory">
+<h1>Factory<a class="headerlink" href="#factory" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="stochopy.factory.ackley">
+<code class="sig-prename descclassname">stochopy.factory.</code><code class="sig-name descname">ackley</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stochopy/factory/benchmark.html#ackley"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stochopy.factory.ackley" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Ackley function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>array_like</em>) – 1-D array of points at which the Ackley function is to be computed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The value of the Ackley function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="stochopy.factory.griewank">
+<code class="sig-prename descclassname">stochopy.factory.</code><code class="sig-name descname">griewank</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stochopy/factory/benchmark.html#griewank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stochopy.factory.griewank" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Griewank function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>array_like</em>) – 1-D array of points at which the Griewank function is to be computed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The value of the Griewank function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="stochopy.factory.quartic">
+<code class="sig-prename descclassname">stochopy.factory.</code><code class="sig-name descname">quartic</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stochopy/factory/benchmark.html#quartic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stochopy.factory.quartic" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Quartic function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>array_like</em>) – 1-D array of points at which the Quartic function is to be computed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The value of the Quartic function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="stochopy.factory.rastrigin">
+<code class="sig-prename descclassname">stochopy.factory.</code><code class="sig-name descname">rastrigin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stochopy/factory/benchmark.html#rastrigin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stochopy.factory.rastrigin" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Rastrigin function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>array_like</em>) – 1-D array of points at which the Rastrigin function is to be computed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The value of the Rastrigin function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="stochopy.factory.rosenbrock">
+<code class="sig-prename descclassname">stochopy.factory.</code><code class="sig-name descname">rosenbrock</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stochopy/factory/benchmark.html#rosenbrock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stochopy.factory.rosenbrock" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Rosenbrock function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>array_like</em>) – 1-D array of points at which the Rosenbrock function is to be computed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The value of the Rosenbrock function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="stochopy.factory.sphere">
+<code class="sig-prename descclassname">stochopy.factory.</code><code class="sig-name descname">sphere</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stochopy/factory/benchmark.html#sphere"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stochopy.factory.sphere" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Sphere function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>array_like</em>) – 1-D array of points at which the Sphere function is to be computed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The value of the Sphere function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="stochopy.factory.styblinski_tang">
+<code class="sig-prename descclassname">stochopy.factory.</code><code class="sig-name descname">styblinski_tang</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stochopy/factory/benchmark.html#styblinski_tang"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stochopy.factory.styblinski_tang" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Styblinski-Tang function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>array_like</em>) – 1-D array of points at which the Styblinski-Tang function is to be computed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The value of the Styblinski-Tang function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="sample.html" class="btn btn-neutral float-left" title="Sample" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Keurfon Luu
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

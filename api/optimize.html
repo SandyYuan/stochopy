@@ -1,0 +1,737 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Optimize &mdash; stochopy 2.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sample" href="sample.html" />
+    <link rel="prev" title="API Reference" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> stochopy
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Reference documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Optimize</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#result">Result</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#available-optimizers">Available optimizers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#competitive-particle-swarm-optimization">Competitive Particle Swarm Optimization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cma-es">CMA-ES</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#differential-evolution">Differential Evolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#particle-swarm-optimization">Particle Swarm Optimization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vdcma">VDCMA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sample.html">Sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="factory.html">Factory</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">stochopy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">API Reference</a> &raquo;</li>
+        
+      <li>Optimize</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/optimize.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="optimize">
+<h1>Optimize<a class="headerlink" href="#optimize" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="stochopy.optimize.minimize">
+<code class="sig-prename descclassname">stochopy.optimize.</code><code class="sig-name descname">minimize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fun</span></em>, <em class="sig-param"><span class="n">bounds</span></em>, <em class="sig-param"><span class="n">x0</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'de'</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stochopy/optimize/_helpers.html#minimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stochopy.optimize.minimize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimize an objective function using a stochastic algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fun</strong> (<em>callable</em>) – The objective function to be minimized. Must be in the form <code class="docutils literal notranslate"><span class="pre">f(x,</span> <span class="pre">*args)</span></code>, where <code class="docutils literal notranslate"><span class="pre">x</span></code> is the argument in the form of a 1-D array and args is a tuple of any additional fixed parameters needed to completely specify the function.</p></li>
+<li><p><strong>bounds</strong> (<em>array_like</em>) – Bounds for variables. <code class="docutils literal notranslate"><span class="pre">(min,</span> <span class="pre">max)</span></code> pairs for each element in <code class="docutils literal notranslate"><span class="pre">x</span></code>, defining the finite lower and upper bounds for the optimizing argument of <code class="docutils literal notranslate"><span class="pre">fun</span></code>. It is required to have <code class="docutils literal notranslate"><span class="pre">len(bounds)</span> <span class="pre">==</span> <span class="pre">len(x)</span></code>. <code class="docutils literal notranslate"><span class="pre">len(bounds)</span></code> is used to determine the number of parameters in <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p><strong>x0</strong> (<em>array_like</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Initial guess. Depending on the solver, array of real elements of size (<code class="docutils literal notranslate"><span class="pre">ndim</span></code>,) or with shape (<code class="docutils literal notranslate"><span class="pre">popsize</span></code>, <code class="docutils literal notranslate"><span class="pre">ndim</span></code>), where <code class="docutils literal notranslate"><span class="pre">ndim</span></code> is the number of independent variables and <code class="docutils literal notranslate"><span class="pre">popsize</span></code> is the total population size if the solver is population-based.</p></li>
+<li><p><strong>args</strong> (<em>tuple</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Extra arguments passed to the objective function.</p></li>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default 'de'</em>) – <p>Type of solver. Should be one of:</p>
+<blockquote>
+<div><ul>
+<li><p>’cmaes’</p></li>
+<li><p>’cpso’</p></li>
+<li><p>’de’</p></li>
+<li><p>’pso’</p></li>
+<li><p>’vdcma’</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>options</strong> (<em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – <p>A dictionary of solver options. All methods accept the following generic options:</p>
+<blockquote>
+<div><ul>
+<li><p>maxiter (int): maximum number of iterations to perform</p></li>
+<li><p>seed (int or None): seed for random number generator</p></li>
+<li><p>return_all (bool): set to True to return an array of all the solutions at each iteration.</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>The optimization result represented as a <a class="reference internal" href="#stochopy.optimize.OptimizeResult" title="stochopy.optimize.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.optimize.OptimizeResult</span></code></a>. Important attributes are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: the solution array</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fun</span></code>: the solution function value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">success</span></code>: a Boolean flag indicating if the optimizer exited successfully</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">message</span></code>: a string which describes the cause of the termination</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#stochopy.optimize.OptimizeResult" title="stochopy.optimize.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.optimize.OptimizeResult</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="section" id="result">
+<h2>Result<a class="headerlink" href="#result" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="stochopy.optimize.OptimizeResult">
+<code class="sig-prename descclassname">stochopy.optimize.</code><code class="sig-name descname">OptimizeResult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stochopy/optimize/_helpers.html#OptimizeResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stochopy.optimize.OptimizeResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent the optimization result.</p>
+<dl class="py attribute">
+<dt id="stochopy.optimize.x">
+<code class="sig-prename descclassname">stochopy.optimize.</code><code class="sig-name descname">x</code><a class="headerlink" href="#stochopy.optimize.x" title="Permalink to this definition">¶</a></dt>
+<dd><p>The solution of the optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array_like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stochopy.optimize.success">
+<code class="sig-prename descclassname">stochopy.optimize.</code><code class="sig-name descname">success</code><a class="headerlink" href="#stochopy.optimize.success" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not the optimizer exited successfully.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stochopy.optimize.status">
+<code class="sig-prename descclassname">stochopy.optimize.</code><code class="sig-name descname">status</code><a class="headerlink" href="#stochopy.optimize.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Termination status of the optimizer. Its value depends on the underlying solver. Refer to message for details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stochopy.optimize.message">
+<code class="sig-prename descclassname">stochopy.optimize.</code><code class="sig-name descname">message</code><a class="headerlink" href="#stochopy.optimize.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description of the cause of the termination.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stochopy.optimize.fun">
+<code class="sig-prename descclassname">stochopy.optimize.</code><code class="sig-name descname">fun</code><a class="headerlink" href="#stochopy.optimize.fun" title="Permalink to this definition">¶</a></dt>
+<dd><p>The solution function value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>scalar</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stochopy.optimize.nit">
+<code class="sig-prename descclassname">stochopy.optimize.</code><code class="sig-name descname">nit</code><a class="headerlink" href="#stochopy.optimize.nit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of iterations performed by the optimizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<p>There may be additional attributes not listed above depending of the specific solver.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="available-optimizers">
+<h2>Available optimizers<a class="headerlink" href="#available-optimizers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="competitive-particle-swarm-optimization">
+<h3>Competitive Particle Swarm Optimization<a class="headerlink" href="#competitive-particle-swarm-optimization" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="stochopy.optimize.cpso">
+<code class="sig-prename descclassname">stochopy.optimize.</code><code class="sig-name descname">cpso</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fun</span></em>, <em class="sig-param"><span class="n">bounds</span></em>, <em class="sig-param"><span class="n">x0</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">maxiter</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">popsize</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">inertia</span><span class="o">=</span><span class="default_value">0.7298</span></em>, <em class="sig-param"><span class="n">cognitivity</span><span class="o">=</span><span class="default_value">1.49618</span></em>, <em class="sig-param"><span class="n">sociability</span><span class="o">=</span><span class="default_value">1.49618</span></em>, <em class="sig-param"><span class="n">competitivity</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xtol</span><span class="o">=</span><span class="default_value">1e-08</span></em>, <em class="sig-param"><span class="n">ftol</span><span class="o">=</span><span class="default_value">1e-08</span></em>, <em class="sig-param"><span class="n">constraints</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">updating</span><span class="o">=</span><span class="default_value">'immediate'</span></em>, <em class="sig-param"><span class="n">workers</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">backend</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">return_all</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stochopy/optimize/cpso/_cpso.html#cpso"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stochopy.optimize.cpso" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimize an objective function using Competitive Particle Swarm Optimization (CPSO).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fun</strong> (<em>callable</em>) – The objective function to be minimized. Must be in the form <code class="docutils literal notranslate"><span class="pre">f(x,</span> <span class="pre">*args)</span></code>, where <code class="docutils literal notranslate"><span class="pre">x</span></code> is the argument in the form of a 1-D array and args is a tuple of any additional fixed parameters needed to completely specify the function.</p></li>
+<li><p><strong>bounds</strong> (<em>array_like</em>) – Bounds for variables. <code class="docutils literal notranslate"><span class="pre">(min,</span> <span class="pre">max)</span></code> pairs for each element in <code class="docutils literal notranslate"><span class="pre">x</span></code>, defining the finite lower and upper bounds for the optimizing argument of <code class="docutils literal notranslate"><span class="pre">fun</span></code>. It is required to have <code class="docutils literal notranslate"><span class="pre">len(bounds)</span> <span class="pre">==</span> <span class="pre">len(x)</span></code>. <code class="docutils literal notranslate"><span class="pre">len(bounds)</span></code> is used to determine the number of parameters in <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p><strong>x0</strong> (<em>array_like</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Initial population. Array of real elements with shape (<code class="docutils literal notranslate"><span class="pre">popsize</span></code>, <code class="docutils literal notranslate"><span class="pre">ndim</span></code>), where <code class="docutils literal notranslate"><span class="pre">ndim</span></code> is the number of independent variables. If <code class="docutils literal notranslate"><span class="pre">x0</span></code> is not specified, the population is initialized using Latin Hypercube sampling.</p></li>
+<li><p><strong>args</strong> (<em>tuple</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Extra arguments passed to the objective function.</p></li>
+<li><p><strong>maxiter</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 100</em>) – The maximum number of generations over which the entire population is evolved.</p></li>
+<li><p><strong>popsize</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 10</em>) – Total population size.</p></li>
+<li><p><strong>inertia</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 0.7298</em>) – Inertial weight, denoted by w in the literature. It should be in the range [0, 1].</p></li>
+<li><p><strong>cognitivity</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.49618</em>) – Cognition parameter, denoted by c1 in the literature. It should be in the range [0, 4].</p></li>
+<li><p><strong>sociability</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.49618</em>) – Sociability parameter, denoted by c2 in the literature. It should be in the range [0, 4].</p></li>
+<li><p><strong>competitivity</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.</em>) – Competitivity parameter, denoted by gamma in the literature. It should be in the range [0, 2].</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Seed for random number generator.</p></li>
+<li><p><strong>xtol</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.0e-8</em>) – Solution tolerance for termination.</p></li>
+<li><p><strong>ftol</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.0e-8</em>) – Objective function value tolerance for termination.</p></li>
+<li><p><strong>constraints</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – <p>Constraints definition:</p>
+<blockquote>
+<div><ul>
+<li><p>None: no constraint</p></li>
+<li><p>’Shrink’: infeasible solutions are repaired by shrinking particles’ velocity vector</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>updating</strong> (<em>str {'immediate'</em><em>, </em><em>'deferred'}</em><em>, </em><em>optional</em><em>, </em><em>default 'immediate'</em>) – If <code class="docutils literal notranslate"><span class="pre">'immediate'</span></code>, the best solution vector is continuously updated within a single generation. This can lead to faster convergence as candidate solutions can take advantage of continuous improvements in the best solution. With <code class="docutils literal notranslate"><span class="pre">'deferred'</span></code>, the best solution vector is updated once per generation. Only <code class="docutils literal notranslate"><span class="pre">'deferred'</span></code> is compatible with parallelization, and is overridden when <code class="docutils literal notranslate"><span class="pre">workers</span></code> is not <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">backend</span> <span class="pre">==</span> <span class="pre">'mpi'</span></code>.</p></li>
+<li><p><strong>workers</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 1</em>) – The population is subdivided into workers sections and evaluated in parallel (uses <code class="xref py py-class docutils literal notranslate"><span class="pre">joblib.Parallel</span></code>). Supply -1 to use all available CPU cores.</p></li>
+<li><p><strong>backend</strong> (<em>str {'loky'</em><em>, </em><em>'threading'</em><em>, </em><em>'mpi'}</em><em>, </em><em>optional</em><em>, </em><em>default 'threading'</em>) – <p>Parallel backend to use when <code class="docutils literal notranslate"><span class="pre">workers</span></code> is not <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>:</p>
+<blockquote>
+<div><ul>
+<li><p>’loky’: disable threading</p></li>
+<li><p>’threading’: enable threading</p></li>
+<li><p>’mpi’: use MPI (uses <code class="xref py py-mod docutils literal notranslate"><span class="pre">mpi4py</span></code>)</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>return_all</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default False</em>) – Set to True to return an array with shape (<code class="docutils literal notranslate"><span class="pre">nit</span></code>, <code class="docutils literal notranslate"><span class="pre">popsize</span></code>, <code class="docutils literal notranslate"><span class="pre">ndim</span></code>) of all the solutions at each iteration.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>The optimization result represented as a <a class="reference internal" href="#stochopy.optimize.OptimizeResult" title="stochopy.optimize.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.optimize.OptimizeResult</span></code></a>. Important attributes are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: the solution array</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fun</span></code>: the solution function value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">success</span></code>: a Boolean flag indicating if the optimizer exited successfully</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">message</span></code>: a string which describes the cause of the termination</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#stochopy.optimize.OptimizeResult" title="stochopy.optimize.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.optimize.OptimizeResult</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id1"><span class="brackets">1</span></dt>
+<dd><ol class="upperalpha simple" start="10">
+<li><p>Kennedy and R. Eberhart, <em>Particle swarm optimization</em>, Proceedings of ICNN’95 - International Conference on Neural Networks, 1995, 4: 1942-1948</p></li>
+</ol>
+</dd>
+<dt class="label" id="id2"><span class="brackets">2</span></dt>
+<dd><ol class="upperalpha simple" start="6">
+<li><p>Van Den Bergh, <em>An analysis of particle swarm optimizers</em>, University of Pretoria, 2001</p></li>
+</ol>
+</dd>
+<dt class="label" id="id3"><span class="brackets">3</span></dt>
+<dd><ol class="upperalpha simple" start="11">
+<li><p>Luu, M. Noble, A. Gesret, N. Belayouni and P.-F. Roux, <em>A parallel competitive Particle Swarm Optimization for non-linear first arrival traveltime tomography and uncertainty quantification</em>, Computers &amp; Geosciences, 2018, 113: 81-93</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="cma-es">
+<h3>CMA-ES<a class="headerlink" href="#cma-es" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="stochopy.optimize.cmaes">
+<code class="sig-prename descclassname">stochopy.optimize.</code><code class="sig-name descname">cmaes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fun</span></em>, <em class="sig-param"><span class="n">bounds</span></em>, <em class="sig-param"><span class="n">x0</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">maxiter</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">popsize</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="o">=</span><span class="default_value">0.1</span></em>, <em class="sig-param"><span class="n">muperc</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xtol</span><span class="o">=</span><span class="default_value">1e-08</span></em>, <em class="sig-param"><span class="n">ftol</span><span class="o">=</span><span class="default_value">1e-08</span></em>, <em class="sig-param"><span class="n">constraints</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">workers</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">backend</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">return_all</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stochopy/optimize/cmaes/_cmaes.html#cmaes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stochopy.optimize.cmaes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimize an objective function using Covariance Matrix Adaptation - Evolution Strategy (CMA-ES).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fun</strong> (<em>callable</em>) – The objective function to be minimized. Must be in the form <code class="docutils literal notranslate"><span class="pre">f(x,</span> <span class="pre">*args)</span></code>, where <code class="docutils literal notranslate"><span class="pre">x</span></code> is the argument in the form of a 1-D array and args is a tuple of any additional fixed parameters needed to completely specify the function.</p></li>
+<li><p><strong>bounds</strong> (<em>array_like</em>) – Bounds for variables. <code class="docutils literal notranslate"><span class="pre">(min,</span> <span class="pre">max)</span></code> pairs for each element in <code class="docutils literal notranslate"><span class="pre">x</span></code>, defining the finite lower and upper bounds for the optimizing argument of <code class="docutils literal notranslate"><span class="pre">fun</span></code>. It is required to have <code class="docutils literal notranslate"><span class="pre">len(bounds)</span> <span class="pre">==</span> <span class="pre">len(x)</span></code>. <code class="docutils literal notranslate"><span class="pre">len(bounds)</span></code> is used to determine the number of parameters in <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p><strong>x0</strong> (<em>array_like</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Initial mean. Array of real elements of size (<code class="docutils literal notranslate"><span class="pre">ndim</span></code>,), where <code class="docutils literal notranslate"><span class="pre">ndim</span></code> is the number of independent variables.</p></li>
+<li><p><strong>args</strong> (<em>tuple</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Extra arguments passed to the objective function.</p></li>
+<li><p><strong>maxiter</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 100</em>) – The maximum number of generations over which the entire population is evolved.</p></li>
+<li><p><strong>popsize</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 10</em>) – Total population size.</p></li>
+<li><p><strong>sigma</strong> (<em>scalar</em><em> or </em><em>array_like</em><em>, </em><em>optional</em><em>, </em><em>default 0.1</em>) – Initial standard deviation (as a fraction of feasible space defined by <code class="docutils literal notranslate"><span class="pre">bounds</span></code>).</p></li>
+<li><p><strong>muperc</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 0.5</em>) – Number of parents (as a fraction of total population size).</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Seed for random number generator.</p></li>
+<li><p><strong>xtol</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.0e-8</em>) – Solution tolerance for termination.</p></li>
+<li><p><strong>ftol</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.0e-8</em>) – Objective function value tolerance for termination.</p></li>
+<li><p><strong>constraints</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – <p>Constraints definition:</p>
+<blockquote>
+<div><ul>
+<li><p>None: no constraint</p></li>
+<li><p>’Penalize’: infeasible solutions are repaired and their function values are penalized</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>workers</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 1</em>) – The population is subdivided into workers sections and evaluated in parallel (uses <code class="xref py py-class docutils literal notranslate"><span class="pre">joblib.Parallel</span></code>). Supply -1 to use all available CPU cores.</p></li>
+<li><p><strong>backend</strong> (<em>str {'loky'</em><em>, </em><em>'threading'</em><em>, </em><em>'mpi'}</em><em>, </em><em>optional</em><em>, </em><em>default 'threading'</em>) – <p>Parallel backend to use when <code class="docutils literal notranslate"><span class="pre">workers</span></code> is not <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>:</p>
+<blockquote>
+<div><ul>
+<li><p>’loky’: disable threading</p></li>
+<li><p>’threading’: enable threading</p></li>
+<li><p>’mpi’: use MPI (uses <code class="xref py py-mod docutils literal notranslate"><span class="pre">mpi4py</span></code>)</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>return_all</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default False</em>) – Set to True to return an array with shape (<code class="docutils literal notranslate"><span class="pre">nit</span></code>, <code class="docutils literal notranslate"><span class="pre">popsize</span></code>, <code class="docutils literal notranslate"><span class="pre">ndim</span></code>) of all the solutions at each iteration.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>The optimization result represented as a <a class="reference internal" href="#stochopy.optimize.OptimizeResult" title="stochopy.optimize.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.optimize.OptimizeResult</span></code></a>. Important attributes are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: the solution array</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fun</span></code>: the solution function value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">success</span></code>: a Boolean flag indicating if the optimizer exited successfully</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">message</span></code>: a string which describes the cause of the termination</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#stochopy.optimize.OptimizeResult" title="stochopy.optimize.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.optimize.OptimizeResult</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id4"><span class="brackets">1</span></dt>
+<dd><ol class="upperalpha simple" start="14">
+<li><p>Hansen, <em>The CMA evolution strategy: A tutorial</em>, Inria, Université Paris-Saclay, LRI, 2011, 102: 1-34</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="differential-evolution">
+<h3>Differential Evolution<a class="headerlink" href="#differential-evolution" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="stochopy.optimize.de">
+<code class="sig-prename descclassname">stochopy.optimize.</code><code class="sig-name descname">de</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fun</span></em>, <em class="sig-param"><span class="n">bounds</span></em>, <em class="sig-param"><span class="n">x0</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">maxiter</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">popsize</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">mutation</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">recombination</span><span class="o">=</span><span class="default_value">0.9</span></em>, <em class="sig-param"><span class="n">strategy</span><span class="o">=</span><span class="default_value">'best1bin'</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xtol</span><span class="o">=</span><span class="default_value">1e-08</span></em>, <em class="sig-param"><span class="n">ftol</span><span class="o">=</span><span class="default_value">1e-08</span></em>, <em class="sig-param"><span class="n">constraints</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">updating</span><span class="o">=</span><span class="default_value">'immediate'</span></em>, <em class="sig-param"><span class="n">workers</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">backend</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">return_all</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stochopy/optimize/de/_de.html#de"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stochopy.optimize.de" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimize an objective function using Differential Evolution (DE).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fun</strong> (<em>callable</em>) – The objective function to be minimized. Must be in the form <code class="docutils literal notranslate"><span class="pre">f(x,</span> <span class="pre">*args)</span></code>, where <code class="docutils literal notranslate"><span class="pre">x</span></code> is the argument in the form of a 1-D array and args is a tuple of any additional fixed parameters needed to completely specify the function.</p></li>
+<li><p><strong>bounds</strong> (<em>array_like</em>) – Bounds for variables. <code class="docutils literal notranslate"><span class="pre">(min,</span> <span class="pre">max)</span></code> pairs for each element in <code class="docutils literal notranslate"><span class="pre">x</span></code>, defining the finite lower and upper bounds for the optimizing argument of <code class="docutils literal notranslate"><span class="pre">fun</span></code>. It is required to have <code class="docutils literal notranslate"><span class="pre">len(bounds)</span> <span class="pre">==</span> <span class="pre">len(x)</span></code>. <code class="docutils literal notranslate"><span class="pre">len(bounds)</span></code> is used to determine the number of parameters in <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p><strong>x0</strong> (<em>array_like</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Initial population. Array of real elements with shape (<code class="docutils literal notranslate"><span class="pre">popsize</span></code>, <code class="docutils literal notranslate"><span class="pre">ndim</span></code>), where <code class="docutils literal notranslate"><span class="pre">ndim</span></code> is the number of independent variables. If <code class="docutils literal notranslate"><span class="pre">x0</span></code> is not specified, the population is initialized using Latin Hypercube sampling.</p></li>
+<li><p><strong>args</strong> (<em>tuple</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Extra arguments passed to the objective function.</p></li>
+<li><p><strong>maxiter</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 100</em>) – The maximum number of generations over which the entire population is evolved.</p></li>
+<li><p><strong>popsize</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 10</em>) – Total population size.</p></li>
+<li><p><strong>mutation</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 0.5</em>) – The mutation constant. In the literature this is also known as differential weight, being denoted by F. It should be in the range [0, 2]. Increasing the mutation constant increases the search radius, but will slow down convergence.</p></li>
+<li><p><strong>recombination</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 0.9</em>) – The recombination constant, should be in the range [0, 1]. In the literature this is also known as the crossover probability, being denoted by CR. Increasing this value allows a larger number of mutants to progress into the next generation, but at the risk of population stability.</p></li>
+<li><p><strong>strategy</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default 'best1bin'</em>) – <p>The differential evolution strategy to use. Should be one of:</p>
+<blockquote>
+<div><ul>
+<li><p>’rand1bin’</p></li>
+<li><p>’rand2bin’</p></li>
+<li><p>’best1bin’</p></li>
+<li><p>’best2bin’</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Seed for random number generator.</p></li>
+<li><p><strong>xtol</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.0e-8</em>) – Solution tolerance for termination.</p></li>
+<li><p><strong>ftol</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.0e-8</em>) – Objective function value tolerance for termination.</p></li>
+<li><p><strong>constraints</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – <p>Constraints definition:</p>
+<blockquote>
+<div><ul>
+<li><p>None: no constraint</p></li>
+<li><p>’Random’: infeasible solutions are resampled in the feasible space defined by <cite>bounds</cite></p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>updating</strong> (<em>str {'immediate'</em><em>, </em><em>'deferred'}</em><em>, </em><em>optional</em><em>, </em><em>default 'immediate'</em>) – If <code class="docutils literal notranslate"><span class="pre">'immediate'</span></code>, the best solution vector is continuously updated within a single generation. This can lead to faster convergence as candidate solutions can take advantage of continuous improvements in the best solution. With <code class="docutils literal notranslate"><span class="pre">'deferred'</span></code>, the best solution vector is updated once per generation. Only <code class="docutils literal notranslate"><span class="pre">'deferred'</span></code> is compatible with parallelization, and is overridden when <code class="docutils literal notranslate"><span class="pre">workers</span></code> is not <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">backend</span> <span class="pre">==</span> <span class="pre">'mpi'</span></code>.</p></li>
+<li><p><strong>workers</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 1</em>) – The population is subdivided into workers sections and evaluated in parallel (uses <code class="xref py py-class docutils literal notranslate"><span class="pre">joblib.Parallel</span></code>). Supply -1 to use all available CPU cores.</p></li>
+<li><p><strong>backend</strong> (<em>str {'loky'</em><em>, </em><em>'threading'</em><em>, </em><em>'mpi'}</em><em>, </em><em>optional</em><em>, </em><em>default 'threading'</em>) – <p>Parallel backend to use when <code class="docutils literal notranslate"><span class="pre">workers</span></code> is not <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>:</p>
+<blockquote>
+<div><ul>
+<li><p>’loky’: disable threading</p></li>
+<li><p>’threading’: enable threading</p></li>
+<li><p>’mpi’: use MPI (uses <code class="xref py py-mod docutils literal notranslate"><span class="pre">mpi4py</span></code>)</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>return_all</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default False</em>) – Set to True to return an array with shape (<code class="docutils literal notranslate"><span class="pre">nit</span></code>, <code class="docutils literal notranslate"><span class="pre">popsize</span></code>, <code class="docutils literal notranslate"><span class="pre">ndim</span></code>) of all the solutions at each iteration.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>The optimization result represented as a <a class="reference internal" href="#stochopy.optimize.OptimizeResult" title="stochopy.optimize.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.optimize.OptimizeResult</span></code></a>. Important attributes are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: the solution array</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fun</span></code>: the solution function value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">success</span></code>: a Boolean flag indicating if the optimizer exited successfully</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">message</span></code>: a string which describes the cause of the termination</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#stochopy.optimize.OptimizeResult" title="stochopy.optimize.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.optimize.OptimizeResult</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id5"><span class="brackets">1</span></dt>
+<dd><ol class="upperalpha simple" start="18">
+<li><p>Storn and K. Price, <em>Differential Evolution - A Simple and Efficient Heuristic for global Optimization over Continuous Spaces</em>, Journal of Global Optimization, 1997, 11(4): 341-359</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="particle-swarm-optimization">
+<h3>Particle Swarm Optimization<a class="headerlink" href="#particle-swarm-optimization" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="stochopy.optimize.pso">
+<code class="sig-prename descclassname">stochopy.optimize.</code><code class="sig-name descname">pso</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fun</span></em>, <em class="sig-param"><span class="n">bounds</span></em>, <em class="sig-param"><span class="n">x0</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">maxiter</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">popsize</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">inertia</span><span class="o">=</span><span class="default_value">0.7298</span></em>, <em class="sig-param"><span class="n">cognitivity</span><span class="o">=</span><span class="default_value">1.49618</span></em>, <em class="sig-param"><span class="n">sociability</span><span class="o">=</span><span class="default_value">1.49618</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xtol</span><span class="o">=</span><span class="default_value">1e-08</span></em>, <em class="sig-param"><span class="n">ftol</span><span class="o">=</span><span class="default_value">1e-08</span></em>, <em class="sig-param"><span class="n">constraints</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">updating</span><span class="o">=</span><span class="default_value">'immediate'</span></em>, <em class="sig-param"><span class="n">workers</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">backend</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">return_all</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#stochopy.optimize.pso" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimize an objective function using Competitive Particle Swarm Optimization (CPSO).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fun</strong> (<em>callable</em>) – The objective function to be minimized. Must be in the form <code class="docutils literal notranslate"><span class="pre">f(x,</span> <span class="pre">*args)</span></code>, where <code class="docutils literal notranslate"><span class="pre">x</span></code> is the argument in the form of a 1-D array and args is a tuple of any additional fixed parameters needed to completely specify the function.</p></li>
+<li><p><strong>bounds</strong> (<em>array_like</em>) – Bounds for variables. <code class="docutils literal notranslate"><span class="pre">(min,</span> <span class="pre">max)</span></code> pairs for each element in <code class="docutils literal notranslate"><span class="pre">x</span></code>, defining the finite lower and upper bounds for the optimizing argument of <code class="docutils literal notranslate"><span class="pre">fun</span></code>. It is required to have <code class="docutils literal notranslate"><span class="pre">len(bounds)</span> <span class="pre">==</span> <span class="pre">len(x)</span></code>. <code class="docutils literal notranslate"><span class="pre">len(bounds)</span></code> is used to determine the number of parameters in <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p><strong>x0</strong> (<em>array_like</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Initial population. Array of real elements with shape (<code class="docutils literal notranslate"><span class="pre">popsize</span></code>, <code class="docutils literal notranslate"><span class="pre">ndim</span></code>), where <code class="docutils literal notranslate"><span class="pre">ndim</span></code> is the number of independent variables. If <code class="docutils literal notranslate"><span class="pre">x0</span></code> is not specified, the population is initialized using Latin Hypercube sampling.</p></li>
+<li><p><strong>args</strong> (<em>tuple</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Extra arguments passed to the objective function.</p></li>
+<li><p><strong>maxiter</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 100</em>) – The maximum number of generations over which the entire population is evolved.</p></li>
+<li><p><strong>popsize</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 10</em>) – Total population size.</p></li>
+<li><p><strong>inertia</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 0.7298</em>) – Inertial weight, denoted by w in the literature. It should be in the range [0, 1].</p></li>
+<li><p><strong>cognitivity</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.49618</em>) – Cognition parameter, denoted by c1 in the literature. It should be in the range [0, 4].</p></li>
+<li><p><strong>sociability</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.49618</em>) – Sociability parameter, denoted by c2 in the literature. It should be in the range [0, 4].</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Seed for random number generator.</p></li>
+<li><p><strong>xtol</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.0e-8</em>) – Solution tolerance for termination.</p></li>
+<li><p><strong>ftol</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.0e-8</em>) – Objective function value tolerance for termination.</p></li>
+<li><p><strong>constraints</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – <p>Constraints definition:</p>
+<blockquote>
+<div><ul>
+<li><p>None: no constraint</p></li>
+<li><p>’Shrink’: infeasible solutions are repaired by shrinking particles’ velocity vector</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>updating</strong> (<em>str {'immediate'</em><em>, </em><em>'deferred'}</em><em>, </em><em>optional</em><em>, </em><em>default 'immediate'</em>) – If <code class="docutils literal notranslate"><span class="pre">'immediate'</span></code>, the best solution vector is continuously updated within a single generation. This can lead to faster convergence as candidate solutions can take advantage of continuous improvements in the best solution. With <code class="docutils literal notranslate"><span class="pre">'deferred'</span></code>, the best solution vector is updated once per generation. Only <code class="docutils literal notranslate"><span class="pre">'deferred'</span></code> is compatible with parallelization, and is overridden when <code class="docutils literal notranslate"><span class="pre">workers</span></code> is not <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">backend</span> <span class="pre">==</span> <span class="pre">'mpi'</span></code>.</p></li>
+<li><p><strong>workers</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 1</em>) – The population is subdivided into workers sections and evaluated in parallel (uses <code class="xref py py-class docutils literal notranslate"><span class="pre">joblib.Parallel</span></code>). Supply -1 to use all available CPU cores.</p></li>
+<li><p><strong>backend</strong> (<em>str {'loky'</em><em>, </em><em>'threading'</em><em>, </em><em>'mpi'}</em><em>, </em><em>optional</em><em>, </em><em>default 'threading'</em>) – <p>Parallel backend to use when <code class="docutils literal notranslate"><span class="pre">workers</span></code> is not <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>:</p>
+<blockquote>
+<div><ul>
+<li><p>’loky’: disable threading</p></li>
+<li><p>’threading’: enable threading</p></li>
+<li><p>’mpi’: use MPI (uses <code class="xref py py-mod docutils literal notranslate"><span class="pre">mpi4py</span></code>)</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>return_all</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default False</em>) – Set to True to return an array with shape (<code class="docutils literal notranslate"><span class="pre">nit</span></code>, <code class="docutils literal notranslate"><span class="pre">popsize</span></code>, <code class="docutils literal notranslate"><span class="pre">ndim</span></code>) of all the solutions at each iteration.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>The optimization result represented as a <a class="reference internal" href="#stochopy.optimize.OptimizeResult" title="stochopy.optimize.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.optimize.OptimizeResult</span></code></a>. Important attributes are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: the solution array</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fun</span></code>: the solution function value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">success</span></code>: a Boolean flag indicating if the optimizer exited successfully</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">message</span></code>: a string which describes the cause of the termination</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#stochopy.optimize.OptimizeResult" title="stochopy.optimize.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.optimize.OptimizeResult</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id6"><span class="brackets">1</span></dt>
+<dd><ol class="upperalpha simple" start="10">
+<li><p>Kennedy and R. Eberhart, <em>Particle swarm optimization</em>, Proceedings of ICNN’95 - International Conference on Neural Networks, 1995, 4: 1942-1948</p></li>
+</ol>
+</dd>
+<dt class="label" id="id7"><span class="brackets">2</span></dt>
+<dd><ol class="upperalpha simple" start="6">
+<li><p>Van Den Bergh, <em>An analysis of particle swarm optimizers</em>, University of Pretoria, 2001</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="vdcma">
+<h3>VDCMA<a class="headerlink" href="#vdcma" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="stochopy.optimize.vdcma">
+<code class="sig-prename descclassname">stochopy.optimize.</code><code class="sig-name descname">vdcma</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fun</span></em>, <em class="sig-param"><span class="n">bounds</span></em>, <em class="sig-param"><span class="n">x0</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">maxiter</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">popsize</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="o">=</span><span class="default_value">0.1</span></em>, <em class="sig-param"><span class="n">muperc</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xtol</span><span class="o">=</span><span class="default_value">1e-08</span></em>, <em class="sig-param"><span class="n">ftol</span><span class="o">=</span><span class="default_value">1e-08</span></em>, <em class="sig-param"><span class="n">constraints</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">workers</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">backend</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">return_all</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/stochopy/optimize/vdcma/_vdcma.html#vdcma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stochopy.optimize.vdcma" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimize an objective function using VD-CMA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fun</strong> (<em>callable</em>) – The objective function to be minimized. Must be in the form <code class="docutils literal notranslate"><span class="pre">f(x,</span> <span class="pre">*args)</span></code>, where <code class="docutils literal notranslate"><span class="pre">x</span></code> is the argument in the form of a 1-D array and args is a tuple of any additional fixed parameters needed to completely specify the function.</p></li>
+<li><p><strong>bounds</strong> (<em>array_like</em>) – Bounds for variables. <code class="docutils literal notranslate"><span class="pre">(min,</span> <span class="pre">max)</span></code> pairs for each element in <code class="docutils literal notranslate"><span class="pre">x</span></code>, defining the finite lower and upper bounds for the optimizing argument of <code class="docutils literal notranslate"><span class="pre">fun</span></code>. It is required to have <code class="docutils literal notranslate"><span class="pre">len(bounds)</span> <span class="pre">==</span> <span class="pre">len(x)</span></code>. <code class="docutils literal notranslate"><span class="pre">len(bounds)</span></code> is used to determine the number of parameters in <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
+<li><p><strong>x0</strong> (<em>array_like</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Initial mean. Array of real elements of size (<code class="docutils literal notranslate"><span class="pre">ndim</span></code>,), where <code class="docutils literal notranslate"><span class="pre">ndim</span></code> is the number of independent variables.</p></li>
+<li><p><strong>args</strong> (<em>tuple</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Extra arguments passed to the objective function.</p></li>
+<li><p><strong>maxiter</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 100</em>) – The maximum number of generations over which the entire population is evolved.</p></li>
+<li><p><strong>popsize</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 10</em>) – Total population size.</p></li>
+<li><p><strong>sigma</strong> (<em>scalar</em><em> or </em><em>array_like</em><em>, </em><em>optional</em><em>, </em><em>default 0.1</em>) – Initial standard deviation (as a fraction of feasible space defined by <code class="docutils literal notranslate"><span class="pre">bounds</span></code>).</p></li>
+<li><p><strong>muperc</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 0.5</em>) – Number of parents (as a fraction of total population size).</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – Seed for random number generator.</p></li>
+<li><p><strong>xtol</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.0e-8</em>) – Solution tolerance for termination.</p></li>
+<li><p><strong>ftol</strong> (<em>scalar</em><em>, </em><em>optional</em><em>, </em><em>default 1.0e-8</em>) – Objective function value tolerance for termination.</p></li>
+<li><p><strong>constraints</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default None</em>) – <p>Constraints definition:</p>
+<blockquote>
+<div><ul>
+<li><p>None: no constraint</p></li>
+<li><p>’Penalize’: infeasible solutions are repaired and their function values are penalized</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>workers</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default 1</em>) – The population is subdivided into workers sections and evaluated in parallel (uses <code class="xref py py-class docutils literal notranslate"><span class="pre">joblib.Parallel</span></code>). Supply -1 to use all available CPU cores.</p></li>
+<li><p><strong>backend</strong> (<em>str {'loky'</em><em>, </em><em>'threading'</em><em>, </em><em>'mpi'}</em><em>, </em><em>optional</em><em>, </em><em>default 'threading'</em>) – <p>Parallel backend to use when <code class="docutils literal notranslate"><span class="pre">workers</span></code> is not <code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>:</p>
+<blockquote>
+<div><ul>
+<li><p>’loky’: disable threading</p></li>
+<li><p>’threading’: enable threading</p></li>
+<li><p>’mpi’: use MPI (uses <code class="xref py py-mod docutils literal notranslate"><span class="pre">mpi4py</span></code>)</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>return_all</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default False</em>) – Set to True to return an array with shape (<code class="docutils literal notranslate"><span class="pre">nit</span></code>, <code class="docutils literal notranslate"><span class="pre">popsize</span></code>, <code class="docutils literal notranslate"><span class="pre">ndim</span></code>) of all the solutions at each iteration.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>The optimization result represented as a <a class="reference internal" href="#stochopy.optimize.OptimizeResult" title="stochopy.optimize.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.optimize.OptimizeResult</span></code></a>. Important attributes are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: the solution array</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fun</span></code>: the solution function value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">success</span></code>: a Boolean flag indicating if the optimizer exited successfully</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">message</span></code>: a string which describes the cause of the termination</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#stochopy.optimize.OptimizeResult" title="stochopy.optimize.OptimizeResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">stochopy.optimize.OptimizeResult</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id8"><span class="brackets">1</span></dt>
+<dd><ol class="upperalpha simple" start="25">
+<li><p>Akimoto, A. Auger and N. Hansen, <em>Comparison-Based Natural Gradient Optimization in High Dimension</em>, Proceedings of the 2014 conference on Genetic and evolutionary computation, 2014, 373-380</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sample.html" class="btn btn-neutral float-right" title="Sample" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Keurfon Luu
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
