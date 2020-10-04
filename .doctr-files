@@ -1,3 +1,6 @@
+./_downloads/c1e08bcfa2aad428f0c0b5f5d23b42bd/basic_usage.py
+./_downloads/e6b70813a85677533f81a22135501dae/basic_usage.ipynb
+./_images/sphx_glr_basic_usage_thumb.png
 ./_modules/index.html
 ./_modules/stochopy/factory/benchmark.html
 ./_modules/stochopy/optimize/_helpers.html
@@ -13,8 +16,14 @@
 ./_sources/api/index.rst.txt
 ./_sources/api/optimize.rst.txt
 ./_sources/api/sample.rst.txt
+./_sources/examples/basic_usage.rst.txt
+./_sources/examples/index.rst.txt
+./_sources/examples/sg_execution_times.rst.txt
+./_sources/gallery/index.rst.txt
 ./_sources/index.rst.txt
 ./_static/basic.css
+./_static/binder_badge_logo.svg
+./_static/broken_example.png
 ./_static/css/badge_only.css
 ./_static/css/fonts/Roboto-Slab-Bold.woff
 ./_static/css/fonts/Roboto-Slab-Bold.woff2
@@ -83,6 +92,9 @@
 ./_static/fonts/lato-normal-italic.woff2
 ./_static/fonts/lato-normal.woff
 ./_static/fonts/lato-normal.woff2
+./_static/gallery-binder.css
+./_static/gallery-dataframe.css
+./_static/gallery.css
 ./_static/jquery-3.5.1.js
 ./_static/jquery.js
 ./_static/js/badge_only.js
@@ -92,6 +104,7 @@
 ./_static/js/theme.js
 ./_static/language_data.js
 ./_static/minus.png
+./_static/no_image.png
 ./_static/plus.png
 ./_static/pygments.css
 ./_static/searchtools.js
@@ -101,6 +114,10 @@
 ./api/index.html
 ./api/optimize.html
 ./api/sample.html
+./examples/basic_usage.html
+./examples/index.html
+./examples/sg_execution_times.html
+./gallery/index.html
 ./genindex.html
 ./index.html
 ./objects.inv
